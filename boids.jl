@@ -2,6 +2,9 @@ using Plots
 using LinearAlgebra
 
 # C. W. Reynolds, "Flocks, Herds, and Schools: A Distributed Behavioral Model", Computer Graphics 21-4 (1987) 25--34.
+# I. D. Couzin, J. Krause, R. James, G. D. Ruxton, N. R. Franks,
+# "Collective memory and spatial sorting in animal groups", 218-1 (2002) 1--11.
+
 # Boids: self-propelled polar particles
 
 #---------- STRUCTURES ----------
