@@ -1,0 +1,55 @@
+using Plots
+
+function xx(P, i, j)
+    Lx,Ly = size(P)
+        
+    r = rand(1:4)
+    
+    if r == 1
+        return P[mod1(i - 1, Lx), j]
+    elseif r == 2
+        return P[mod1(i + 1, Lx), j]
+    elseif r == 3
+        return P[i, mod1(j - 1, Ly)]
+    else
+        return P[i, mod1(j + 1, Ly)]
+    end
+end
+
+function initialize_grid(x,Lx,Ly)
+    G = zeros(Lx,Ly)
+    
+    for i in 1:Lx, j in 1:Ly
+        r = rand()
+        
+        if r <= x
+            G[i,j] = 1
+        else
+            G[i,j] = 2
+        end
+    end
+    
+    return G
+end
+
+function update_grid!(P,iterations_per_frame)
+    Lx,Ly = size(P)
+    
+    
+    for _ in 1:iterations_per_frame
+        i,j = rand(1:Lx), rand(1:Ly)
+                
+        P[i,j] = xx(P,i,j)
+    end
+end
+   
+P = initialize_grid(0.7,50,50)
+   
+anim = @animate for _ in 1:1000
+    update_grid!(P,500)
+    heatmap(P, c = ["red", "blue"])
+end
+
+gif(anim,"voter.gif",fps=10)
+
+
